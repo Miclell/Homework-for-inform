@@ -16,19 +16,20 @@ namespace Задача_1
             return arrayearly;
         }
 
-        private static int[] DivisionFractions(int[] fraction1, int[] fraction2)
+        private static int[] DifferenceFractions(int[] fraction1, int[] fraction2)
         {
-            int temp;
             int[] result = new int[2];
-
-            temp = fraction2[1];
-            fraction2[1] = fraction2[0];
-            fraction2[0] = temp;
-
-            for (int i = 0; i < 2; i++)
+            
+            if (fraction1[1] != fraction2[1])
             {
-                result[i] = fraction1[i] * fraction2[i];          
-            }
+                fraction1[0] = fraction2[1] * fraction1[0];
+                fraction2[0] = fraction1[1] * fraction2[0];
+                fraction1[1] *= fraction2[1];
+                fraction2[1] = fraction1[1];
+            }            
+            
+            result[0] = fraction1[0] - fraction2[0];
+            result[1] = fraction1[1];
 
             return result;
         }
@@ -73,10 +74,11 @@ namespace Задача_1
         {
             int[] fraction1 = new int[2];
             int[] fraction2 = new int[2];
+            
             fraction1 = InputArrayForFraction(fraction1);
             Console.WriteLine();
             fraction2 = InputArrayForFraction(fraction2);
-            int [] result = DivisionFractions(fraction1, fraction2);
+            int [] result = DifferenceFractions(fraction1, fraction2);
             Console.WriteLine();
             CheckCut(result);
         }
